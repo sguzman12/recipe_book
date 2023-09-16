@@ -16,7 +16,8 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier": "warn",
+        // "import/no-unresolved": "warn",
         "no-unused-vars": "warn",
         "no-console": "off",
         "func-names": "off",
