@@ -1,0 +1,12 @@
+// Initial Project Template Branch w/Bootstrap
+initial-template
+
+// Workaround for Hash Issue because of Node 18
+export NODE_OPTIONS=--openssl-legacy-provider
+
+// Strict Mode
+Strict mode forces you to write more verbose code in some places (especially when it comes to class properties). If you enabled it by accident, you can also disable it by setting strict: false in your tsconfig.json file.
+
+// Error being thrown on ng serve because of Bootstrap.
+// Leads to slow loading but nothing to do other than remove bootstrap
+https://github.com/ng-bootstrap/ng-bootstrap/issues/4306
