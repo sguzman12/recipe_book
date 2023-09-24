@@ -1,6 +1,18 @@
-// Initial Project Template Branch w/Bootstrap
-initial-template
+***** General Knowledge *****
+// Component
 
+	* It is basically a class with a decorator @Component which tells angular that the class is a component.
+	* They are always associated with an HTML template and some CSS.
+	* When a part of html gets repeated with a similar functionality it is always best to put it into a   	component. This component can be called where ever the same functionality is required.
+
+// Services
+
+	* They are central units for some common functions across the application.
+	* They are simple classes with functions and members.
+	* Used when - Duplication of code exists, Access/store data.
+	* No decorator exists for Services unlike @Component and @Directive. @Injectable is used only when one service needs to be used by a component, directive or another service.
+
+***** Tips and General Workarounds *****
 // Workaround for Hash Issue because of Node 18
 export NODE_OPTIONS=--openssl-legacy-provider
 
@@ -10,3 +22,45 @@ Strict mode forces you to write more verbose code in some places (especially whe
 // Error being thrown on ng serve because of Bootstrap.
 // Leads to slow loading but nothing to do other than remove bootstrap
 https://github.com/ng-bootstrap/ng-bootstrap/issues/4306
+
+***** Commands *****
+// yarn scripts
+yarn = install node_modules folder
+yarn start = start server
+yarn build = create build
+yarn lint-fix = fix formatting
+yarn nuke:cache = delete node_modules cache
+yarn nuke:node_folder = delete node_modules folder
+
+// ng scripts
+ng serve = start server
+ctrl + c = stop server
+ng g c <component name> = create component
+	By default, this command creates the following:
+
+    A directory named after the component
+    A component file, <component-name>.component.ts
+    A template file, <component-name>.component.html
+    A CSS file, <component-name>.component.css
+    A testing specification file, <component-name>.component.spec.ts
+
+ng g s <service name> = create service
+
+***** Working with Angular *****
+// PASSING DATA THROUGH BINDING
+	// Parent component.ts
+	In export class ParentComponent
+		variable: type = <value>
+		
+	// Parent component.html
+		<child component [childs_variable_name] = "<parent variable>"
+
+	// Child Component.ts
+		import Input from @angular/core
+		// In export class ChildComponent
+			@Input() childs_variable_name: type
+			
+	// Child Component.html
+	{{ childs_variable_name }} inside tags where you want to use
+		// example
+		<h2>{{ childs_variable_name }} Menu</h2>
