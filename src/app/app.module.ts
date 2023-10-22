@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 import { AppComponent } from './app.component'
+import { HttpClientModule } from '@angular/common/http'
+import { RecipeCardComponent } from './components/recipe-card/recipe-card.component'
+import { IngredientsSnackbarComponent } from './components/ingredients-snackbar/ingredients-snackbar.component'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, MatSlideToggleModule],
+  imports: [BrowserModule, HttpClientModule, RecipeCardComponent, IngredientsSnackbarComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

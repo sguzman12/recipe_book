@@ -1,0 +1,9 @@
+// export interface Recipe {
+//   title: string
+//   category: string
+//   description: string
+//   ingredients: string[]
+// }
+
+// let jsonObj = JSON.parse(recipeString);
+// let recipe = jsonObj as Recipe;
