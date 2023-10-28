@@ -1,4 +1,4 @@
-<mat-card class="recipe-card" appearance="outlined raised">
+<mat-card class="recipe-card" (click)="getIngredients(recipes.ingredients)">
     <mat-card-header>
         <mat-card-title>{{recipes.title}}</mat-card-title>
         <mat-card-subtitle>{{recipes.category}}</mat-card-subtitle>

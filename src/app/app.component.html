@@ -1,4 +1,7 @@
 <div class="container">
+    <nav>
+        <app-input-bar></app-input-bar>
+    </nav>
     <div class="recipes" *ngFor="let recipe of recipes">
         <app-recipe-card [recipes]="recipe" *ngIf="dataLoaded"></app-recipe-card>
     </div>

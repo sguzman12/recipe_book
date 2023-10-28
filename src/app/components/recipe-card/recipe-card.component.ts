@@ -17,7 +17,7 @@ export class RecipeCardComponent {
   constructor(private ingredientsService: IngredientsService) {}
 
   getIngredients(ingredients: Ingredient[]): void {
-    // console.log('recipe-card_getIngredients', ingredients)
-    this.ingredientsService.displayIngredients(ingredients)
+    console.log('recipe-card_getIngredients', ingredients)
+    // this.ingredientsService.displayIngredients(ingredients)
   }
 }
