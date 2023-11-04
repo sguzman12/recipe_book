@@ -15,9 +15,4 @@ export class FetchRecipeService {
   public getJSON(): Observable<any> {
     return this.http.get<{ recipes: Recipe[] }>('../../assets/data/recipes.json')
   }
-  // public getJSON(): Observable<Recipe[]> {
-  //   return this.http
-  //     .get<Recipe[]>('../../assets/data/recipes.json')
-  //     .pipe(map((data: { recipes: Recipe[] }) => data.recipes))
-  // }
 }

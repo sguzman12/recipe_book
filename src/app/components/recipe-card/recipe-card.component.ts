@@ -16,8 +16,12 @@ export class RecipeCardComponent {
 
   constructor(private ingredientsService: IngredientsService) {}
 
+  ngOnInit() {
+    console.log('RecipeCard', this.recipes)
+  }
+
   getIngredients(ingredients: Ingredient[]): void {
     console.log('recipe-card_getIngredients', ingredients)
-    // this.ingredientsService.displayIngredients(ingredients)
+    this.ingredientsService.displayIngredients(ingredients)
   }
 }

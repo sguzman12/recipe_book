@@ -2,7 +2,10 @@
     <nav>
         <app-input-bar></app-input-bar>
     </nav>
-    <div class="recipes" *ngFor="let recipe of recipes">
+    <div class="recipes" *ngFor="let recipe of displayedRecipes">
         <app-recipe-card [recipes]="recipe" *ngIf="dataLoaded"></app-recipe-card>
+    </div>
+    <div class="detailed_screen">
+        <app-detailed-screen [ingredients]="ingredients"></app-detailed-screen>
     </div>
 </div>
