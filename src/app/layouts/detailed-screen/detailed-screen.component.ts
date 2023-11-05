@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
 import { Ingredient, Recipe } from 'src/app/models/recipe.model'
 
 @Component({
@@ -8,7 +9,7 @@ import { Ingredient, Recipe } from 'src/app/models/recipe.model'
 })
 export class DetailedScreenComponent {
   @Input() ingredients: Ingredient[]
-  // @Input() recipe: Recipe
+  @Input() currentRecipe: Recipe
 
   completedItems: string[] = []
 

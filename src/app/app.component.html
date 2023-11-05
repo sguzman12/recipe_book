@@ -8,6 +8,7 @@
         </div>
     </div>
     <div class="detailed_screen">
-        <app-detailed-screen [ingredients]="ingredients"></app-detailed-screen>
+        <app-detailed-screen *ngIf="ingredients && ingredients.length > 0 && currentRecipe" [ingredients]="ingredients"
+            [currentRecipe]="currentRecipe"></app-detailed-screen>
     </div>
 </div>

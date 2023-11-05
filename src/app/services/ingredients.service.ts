@@ -12,8 +12,9 @@ export class IngredientsService {
   ingredients$ = this.ingredientsSubject.asObservable()
   recipe$ = this.recipeSubject.asObservable()
 
-  displayIngredients(ingredients: Ingredient[]): void {
+  displayIngredients(ingredients: Ingredient[], recipe: Recipe): void {
     this.ingredientsSubject.next(ingredients)
-    // this.recipeSubject.next(recipe)
+    this.recipeSubject.next(recipe)
+    console.log('IngredientService Recipe: ', recipe)
   }
 }

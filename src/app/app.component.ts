@@ -16,6 +16,7 @@ export class AppComponent {
   dataLoaded: boolean = false
   ingredientsRecieved: boolean = false
   userInput: string
+  currentRecipe: Recipe
 
   constructor(
     private recipeService: FetchRecipeService,
@@ -24,6 +25,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
+    // Retrieve Recipes
     this.recipeService.getJSON().subscribe((data) => {
       this.recipes = data.recipes
       this.displayedRecipes = data.recipes
@@ -31,6 +33,7 @@ export class AppComponent {
       this.dataLoaded = true
     })
 
+    // Retrieve user Input and filter
     this.userInputService.userInput$.subscribe((input) => {
       this.userInput = input
 
@@ -50,8 +53,16 @@ export class AppComponent {
       }
     })
 
+    // Retrieve ingredients
     this.ingredientService.ingredients$.subscribe((ingredients) => {
+      console.log('App Component Ingredients', ingredients)
       this.ingredients = ingredients
+    })
+
+    // Retrieve current Recipe
+    this.ingredientService.recipe$.subscribe((c_recipe) => {
+      console.log('App Component Current Recipe', c_recipe)
+      this.currentRecipe = c_recipe
     })
   }
 }

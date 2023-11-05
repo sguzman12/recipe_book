@@ -1,4 +1,7 @@
-<!-- <h1>{{recipe.title}}</h1> -->
+<button mat-raised-button color="primary">Back</button>
+<h1>{{currentRecipe.title}}</h1>
+<h3>{{currentRecipe.category}}</h3>
+<p>{{currentRecipe.description}}</p>
 <ul *ngFor="let ingredient of ingredients" [ngClass]="{'completed': completedItems.includes(ingredient)}">
     <li (click)="toggleCompleted(ingredient)">{{ingredient.ing_name}}</li>
 </ul>

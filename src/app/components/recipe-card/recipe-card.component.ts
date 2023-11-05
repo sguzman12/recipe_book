@@ -20,8 +20,9 @@ export class RecipeCardComponent {
     console.log('RecipeCard', this.recipes)
   }
 
-  getIngredients(ingredients: Ingredient[]): void {
+  getIngredients(ingredients: Ingredient[], recipe: Recipe): void {
+    console.log('Event: ', recipe)
     console.log('recipe-card_getIngredients', ingredients)
-    this.ingredientsService.displayIngredients(ingredients)
+    this.ingredientsService.displayIngredients(ingredients, recipe)
   }
 }
