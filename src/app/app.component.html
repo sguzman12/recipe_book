@@ -1,12 +1,18 @@
-<div class="container">
-    <nav class="input">
-        <app-input-bar></app-input-bar>
-    </nav>
+<nav class="input">
+    <app-input-bar *ngIf="showRecipeContainer"></app-input-bar>
+</nav>
+<div class="recipe-container"
+    [ngStyle]="{'opacity': showRecipeContainer ? 1 : 0, 'height': showRecipeContainer ? 'auto' : 0}"
+    [hidden]="!showRecipeContainer">
     <div class="main">
         <div class="recipes" *ngFor="let recipe of displayedRecipes">
             <app-recipe-card [recipes]="recipe" *ngIf="dataLoaded"></app-recipe-card>
         </div>
     </div>
+</div>
+<div class="details-container"
+    [ngStyle]="{'opacity': showDetailsContainer ? 1 : 0, 'height': showDetailsContainer ? 'auto' : 0}"
+    [hidden]="!showDetailsContainer">
     <div class="detailed_screen">
         <app-detailed-screen *ngIf="ingredients && ingredients.length > 0 && currentRecipe" [ingredients]="ingredients"
             [currentRecipe]="currentRecipe"></app-detailed-screen>

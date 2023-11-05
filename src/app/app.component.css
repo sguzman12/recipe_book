@@ -1,5 +1,18 @@
-.container{
+.recipe-container{
     display:grid;
+    opacity: 1;
+    height: auto;
+    transition: opacity 1s, height 1s;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+}
+
+.detailed-container{
+    display:grid;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 1s, height 1s;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
 }
@@ -9,7 +22,8 @@
 }
 
 .input{
-    margin:auto;
+    height: 3.5em;
+    padding: 1em;
     width:100%;
     display: flex;
     justify-content:flex-start;
@@ -25,8 +39,7 @@
 
 .detailed_screen{
     grid-row: 3/4;
-    border: .1em solid red;
     width:fit-content;
-    padding: 0 1em 0 1em;
+    padding: 1em 1em 0 1em;
     font-size: large;
 }
