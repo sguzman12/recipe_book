@@ -1,0 +1,4 @@
+<!-- <h1>{{recipe.title}}</h1> -->
+<ul *ngFor="let ingredient of ingredients" [ngClass]="{'completed': completedItems.includes(ingredient)}">
+    <li (click)="toggleCompleted(ingredient)">{{ingredient.ing_name}}</li>
+</ul>

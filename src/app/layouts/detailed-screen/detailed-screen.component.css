@@ -1,0 +1,8 @@
+.completed {
+    text-decoration: line-through;
+}
+
+li{
+    font-family: Copperplate;
+    cursor: pointer;
+}

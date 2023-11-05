@@ -1,7 +1,28 @@
 .container{
-    display:flex
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
 }
 
 .recipes{
     padding: 2em;
+}
+
+.input{
+    margin:auto;
+    width:50%;
+    grid-row: 1/2;
+}
+.main{
+ grid-row: 2/3;
+ display: flex;
+ flex-wrap: wrap;
+}
+
+.detailed_screen{
+    grid-row: 3/4;
+    border: .1em solid red;
+    width:fit-content;
+    padding: 0 1em 0 1em;
+    font-size: large;
 }
