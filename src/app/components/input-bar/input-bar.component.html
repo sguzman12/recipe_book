@@ -1,6 +1,7 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
+<form class="input_container">
+    <mat-form-field class="user_input">
         <mat-label>Favorite food</mat-label>
         <input matInput placeholder="Ex. Chicken" [(ngModel)]="userInput" (input)="updateUserInput()">
     </mat-form-field>
+    <button class="input_bar_form" mat-raised-button color="primary" (click)="showRecipeForm()">Add Recipe</button>
 </form>

@@ -1,0 +1,15 @@
+/* .input_container{
+    /* display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    display: block;
+} */
+
+.user_input{
+    float: left;
+}
+
+.input_bar_form{
+    float: right;
+    margin-right: 2em;
+}

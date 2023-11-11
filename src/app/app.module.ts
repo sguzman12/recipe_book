@@ -8,6 +8,7 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
 import { IngredientsSnackbarComponent } from './components/ingredients-snackbar/ingredients-snackbar.component'
 import { InputBarComponent } from './components/input-bar/input-bar.component'
 import { DetailedScreenComponent } from './layouts/detailed-screen/detailed-screen.component'
+import { FormNewRecipeComponent } from './components/form-new-recipe/form-new-recipe.component'
 
 @NgModule({
   declarations: [AppComponent, DetailedScreenComponent],
@@ -18,6 +19,7 @@ import { DetailedScreenComponent } from './layouts/detailed-screen/detailed-scre
     RecipeCardComponent,
     InputBarComponent,
     IngredientsSnackbarComponent,
+    FormNewRecipeComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
