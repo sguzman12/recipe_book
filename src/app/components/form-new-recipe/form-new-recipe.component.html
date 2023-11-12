@@ -1,1 +1,48 @@
-<h1>New Form Created!!</h1>
+<header>
+    <h1 class="dialog_header">New Recipe</h1>
+</header>
+<div class="dialog_body">
+    <mat-form-field appearance="outline">
+        <mat-label>Recipe Name</mat-label>
+        <input matInput [(ngModel)]="title" placeholder="Grandma's Brownies..." required>
+        <mat-hint>*required</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="category" required>
+            <mat-option value="Meat">Meat</mat-option>
+            <mat-option value="Salad">Salad</mat-option>
+            <mat-option value="Chicken">Chicken</mat-option>
+            <mat-option value="Soup">Soup</mat-option>
+            <mat-option value="Dessert">Dessert</mat-option>
+        </mat-select>
+        <mat-hint>*required</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Tell Us About the Dish!</mat-label>
+        <textarea matInput [(ngModel)]="description" required></textarea>
+        <mat-hint>*required</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Ingredients</mat-label>
+        <input matInput [(ngModel)]="ingredients" placeholder="Cherries, Garlic, Onion..." required>
+        <!-- <input type="text" placeholder="Cherries, Garlic, Onion..." matInput [formControl]="ingredientControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of data.autoCompleteOptions" track option
+                [value]="option">{{option}}</mat-option>
+        </mat-autocomplete> -->
+    </mat-form-field>
+    <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Current Ingredients</mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <section>
+        <div class="dialog_row">
+            <button class="cancel_position" mat-raised-button color="warn">Cancel</button>
+            <button class="submit_position" mat-raised-button>Submit</button>
+        </div>
+    </section>
+</div>

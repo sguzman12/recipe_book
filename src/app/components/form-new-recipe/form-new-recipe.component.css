@@ -1,0 +1,46 @@
+section{
+    display: table;
+    width: 100%;
+    padding-top: 1em;
+}
+
+header{
+    color:#FF8000;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    text-align: center;
+    font-family: 'Festive';
+}
+
+.dialog_header{
+    height: 100%;
+}
+
+.dialog_body{
+    padding: 0 1em 1em 1em;
+    background-color: #f7f0f0;
+}
+
+.dialog_row{    
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+}
+
+.cancel_position{
+    grid-column: 1;
+    width: fit-content;
+}
+
+.submit_position{
+    grid-column: 2;  
+    width:fit-content; 
+    justify-self: end;
+    background-color: #AAFF00;
+}
+
+@font-face {
+    font-family: 'Festive';
+    src: url('../../../assets/Festive-Regular.ttf');
+}

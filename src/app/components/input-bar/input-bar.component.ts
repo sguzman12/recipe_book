@@ -16,6 +16,7 @@ import { FormNewRecipeComponent } from '../form-new-recipe/form-new-recipe.compo
 })
 export class InputBarComponent {
   userInput = ''
+  autoCompleteOptions: string[] = ['Cherry', 'Onion', 'Chicken', 'Steak', 'Cheese']
   constructor(
     private readUserInputService: ReadUserInputService,
     public dialog: MatDialog,
@@ -30,9 +31,10 @@ export class InputBarComponent {
     const exitAnimationDuration = '1500ms'
 
     this.dialog.open(FormNewRecipeComponent, {
-      width: '250px',
+      width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: { options: this.autoCompleteOptions },
     })
   }
 }
