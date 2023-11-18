@@ -23,20 +23,28 @@
         <textarea matInput [(ngModel)]="description" required></textarea>
         <mat-hint>*required</mat-hint>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Ingredients</mat-label>
-        <input matInput [(ngModel)]="ingredients" placeholder="Cherries, Garlic, Onion..." required>
-        <!-- <input type="text" placeholder="Cherries, Garlic, Onion..." matInput [formControl]="ingredientControl"
-            [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of data.autoCompleteOptions" track option
-                [value]="option">{{option}}</mat-option>
-        </mat-autocomplete> -->
-    </mat-form-field>
+    <div class="ingredients-panel">
+        <mat-form-field appearance="outline">
+            <mat-label>Ingredients</mat-label>
+            <input matInput [(ngModel)]="userIngredientInput" placeholder="Cherries, Garlic, Onion...">
+            <!-- <input type="text" placeholder="Cherries, Garlic, Onion..." matInput [formControl]="ingredientControl"
+                [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of data.autoCompleteOptions" track option
+                    [value]="option">{{option}}</mat-option>
+            </mat-autocomplete> -->
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addIngredient()">Add</button>
+    </div>
+
     <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
             <mat-panel-title>Current Ingredients</mat-panel-title>
         </mat-expansion-panel-header>
+        <mat-panel-description>
+            <ul id="ingredientList">
+            </ul>
+        </mat-panel-description>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
     <section>
