@@ -4,12 +4,13 @@
 <div class="dialog_body">
     <mat-form-field appearance="outline">
         <mat-label>Recipe Name</mat-label>
-        <input matInput [(ngModel)]="title" placeholder="Grandma's Brownies..." required>
+        <input matInput placeholder="Grandma's Brownies..." [(ngModel)]="title" required>
         <mat-hint>*required</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Category</mat-label>
-        <mat-select [(ngModel)]="category" required>
+        <mat-select required [(ngModel)]="category">
+            <mat-option value="">Please select one</mat-option>
             <mat-option value="Meat">Meat</mat-option>
             <mat-option value="Salad">Salad</mat-option>
             <mat-option value="Chicken">Chicken</mat-option>
@@ -20,7 +21,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Tell Us About the Dish!</mat-label>
-        <textarea matInput [(ngModel)]="description" required></textarea>
+        <textarea matInput required [(ngModel)]="description"></textarea>
         <mat-hint>*required</mat-hint>
     </mat-form-field>
     <div class="ingredients-panel">
@@ -28,15 +29,14 @@
             <mat-label>Ingredients</mat-label>
             <input matInput [(ngModel)]="userIngredientInput" placeholder="Cherries, Garlic, Onion...">
             <!-- <input type="text" placeholder="Cherries, Garlic, Onion..." matInput [formControl]="ingredientControl"
-                [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of data.autoCompleteOptions" track option
-                    [value]="option">{{option}}</mat-option>
-            </mat-autocomplete> -->
+                    [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of data.autoCompleteOptions" track option
+                        [value]="option">{{option}}</mat-option>
+                </mat-autocomplete> -->
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="addIngredient()">Add</button>
     </div>
-
     <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
             <mat-panel-title>Current Ingredients</mat-panel-title>
@@ -49,8 +49,8 @@
     <mat-divider></mat-divider>
     <section>
         <div class="dialog_row">
-            <button class="cancel_position" mat-raised-button color="warn">Cancel</button>
-            <button class="submit_position" mat-raised-button>Submit</button>
+            <button class="cancel_position" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+            <button class="submit_position" mat-raised-button type="submit" (click)="onSubmit()">Submit</button>
         </div>
     </section>
 </div>

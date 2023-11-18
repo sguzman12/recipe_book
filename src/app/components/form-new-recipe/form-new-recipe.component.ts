@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormControl, FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -10,7 +10,6 @@ import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
 import { Ingredient } from 'src/app/models/recipe.model'
-import { DialogIngredientsService } from 'src/app/services/dialog-ingredients.service'
 
 @Component({
   standalone: true,
@@ -19,10 +18,10 @@ import { DialogIngredientsService } from 'src/app/services/dialog-ingredients.se
   styleUrls: ['./form-new-recipe.component.css'],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    ReactiveFormsModule,
     MatAutocompleteModule,
     MatExpansionModule,
     MatDividerModule,
@@ -32,21 +31,27 @@ import { DialogIngredientsService } from 'src/app/services/dialog-ingredients.se
 export class FormNewRecipeComponent {
   title: string
   category: string
-  url_img: string
+  url_img: ''
   description: string
   userIngredientInput: string
   ingredients: Ingredient[]
+  errors: string[]
   ingredientControl = new FormControl('')
   panelOpenState = true
+  items: string[]
 
   constructor(
     public dialogRef: MatDialogRef<FormNewRecipeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogIngredientService: DialogIngredientsService,
   ) {}
 
   ngOnInit(): void {
     this.ingredients = []
+    this.title = ''
+    this.category = ''
+    this.url_img = ''
+    this.description = ''
+    this.errors = []
   }
 
   addIngredient(): void {
@@ -61,15 +66,43 @@ export class FormNewRecipeComponent {
 
   updateIngredientPanel() {
     const ingredientPanel = document.getElementById('ingredientList')
-    console.log(ingredientPanel)
     ingredientPanel.innerHTML = ''
 
     this.ingredients.forEach((ingredient) => {
-      console.log(ingredient)
       const listItem = document.createElement('li')
       listItem.textContent = ingredient.ing_name
       ingredientPanel.appendChild(listItem)
     })
+  }
+
+  onSubmit(): void {
+    let inputValid: boolean = false
+
+    inputValid = this.validateInput()
+    if (inputValid) {
+      alert('Success')
+    } else {
+      if (this.title.trim() === '') {
+        this.errors.push('Please enter a recipe name')
+      }
+      if (this.description.trim() === '') {
+        this.errors.push('Please give your dish a description')
+      }
+      if (!this.category) {
+        this.errors.push('Please select a food category')
+      }
+    }
+  }
+
+  onCancel(): void {
+    this.dialogRef.close()
+  }
+
+  validateInput(): boolean {
+    if (this.title.trim() !== '' && this.description.trim() !== '' && this.category !== '') {
+      return true
+    }
+    return false
   }
 
   trackOption(index: number, option: any): string {
