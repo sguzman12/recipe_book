@@ -9,7 +9,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
+import { Recipe } from 'src/app/models/recipe.model'
 import { Ingredient } from 'src/app/models/recipe.model'
+import { WriteNewRecipeEntryService } from 'src/app/services/write-new-recipe-entry.service'
 
 @Component({
   standalone: true,
@@ -43,6 +45,7 @@ export class FormNewRecipeComponent {
   constructor(
     public dialogRef: MatDialogRef<FormNewRecipeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private newEntry: WriteNewRecipeEntryService,
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +60,6 @@ export class FormNewRecipeComponent {
   addIngredient(): void {
     if (this.userIngredientInput.trim() !== '') {
       let newIngredient: Ingredient = { ing_name: this.userIngredientInput }
-      // this.dialogIngredientService.addIngredient(newIngredient);
       this.ingredients.push(newIngredient)
       this.userIngredientInput = ''
       this.updateIngredientPanel()
@@ -80,7 +82,8 @@ export class FormNewRecipeComponent {
 
     inputValid = this.validateInput()
     if (inputValid) {
-      alert('Success')
+      console.log('input is valid')
+      this.buildRecipe()
     } else {
       if (this.title.trim() === '') {
         this.errors.push('Please enter a recipe name')
@@ -103,6 +106,31 @@ export class FormNewRecipeComponent {
       return true
     }
     return false
+  }
+
+  buildRecipe() {
+    console.log('Build Recipe Ingredients', this.ingredients)
+
+    const formattedIngredients = this.ingredients.map((ingredient) => {
+      return { ing_name: ingredient.ing_name }
+    })
+
+    let newRecipe: Recipe = {
+      title: this.title,
+      category: this.category,
+      url_img: '',
+      description: this.description,
+      ingredients: formattedIngredients,
+    }
+
+    this.newEntry.writeData(newRecipe).subscribe(
+      (response) => {
+        console.log('Data written successfully', response)
+      },
+      (error) => {
+        console.error('Error writing data', error)
+      },
+    )
   }
 
   trackOption(index: number, option: any): string {

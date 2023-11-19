@@ -7,12 +7,13 @@ import { Recipe } from '../models/recipe.model'
   providedIn: 'root',
 })
 export class WriteNewRecipeEntryService {
-  private apiUrl = '../../assets/data/recipes.json'
+  private apiUrl = 'http://localhost:3000/api/writeData'
 
   constructor(private http: HttpClient) {}
 
   // Write new data to the JSON file
-  writeData(newData: Recipe[]): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/writeData`, { recipes: newData })
+  writeData(newData: Recipe): Observable<any> {
+    console.log(newData)
+    return this.http.post(this.apiUrl, { recipes: newData })
   }
 }

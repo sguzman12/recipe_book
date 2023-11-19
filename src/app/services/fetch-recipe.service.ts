@@ -7,12 +7,13 @@ import { Recipe } from '../models/recipe.model'
   providedIn: 'root',
 })
 export class FetchRecipeService {
+  private apiUrl = 'http://localhost:3000/api/readData'
   constructor(private http: HttpClient) {
     this.getJSON().subscribe((data) => {
       console.log('FetchService', data)
     })
   }
   public getJSON(): Observable<any> {
-    return this.http.get<{ recipes: Recipe[] }>('../../assets/data/recipes.json')
+    return this.http.get<{ recipes: Recipe[] }>(this.apiUrl)
   }
 }
