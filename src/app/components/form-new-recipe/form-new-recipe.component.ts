@@ -60,7 +60,7 @@ export class FormNewRecipeComponent {
 
   addIngredient(): void {
     if (this.userIngredientInput.trim() !== '') {
-      let newIngredient: Ingredient = { ing_name: this.userIngredientInput }
+      let newIngredient: Ingredient = { ingredient: { ing_name: this.userIngredientInput } }
       this.ingredients.push(newIngredient)
       this.userIngredientInput = ''
       this.updateIngredientPanel()
@@ -73,7 +73,7 @@ export class FormNewRecipeComponent {
 
     this.ingredients.forEach((ingredient) => {
       const listItem = document.createElement('li')
-      listItem.textContent = ingredient.ing_name
+      listItem.textContent = ingredient.ingredient.ing_name
       ingredientPanel.appendChild(listItem)
     })
   }
@@ -112,10 +112,10 @@ export class FormNewRecipeComponent {
   buildRecipe() {
     console.log('Build Recipe Ingredients', this.ingredients)
 
-    console.log(_.flatten(this.ingredients))
+    // console.log(_.flatten(this.ingredients))
 
     const formattedIngredients = this.ingredients.map((ingredient) => {
-      return { ing_name: ingredient.ing_name }
+      return { ingredient: { ing_name: ingredient.ingredient.ing_name } }
     })
 
     let newRecipe: Recipe = {

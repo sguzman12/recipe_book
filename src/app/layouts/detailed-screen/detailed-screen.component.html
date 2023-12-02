@@ -3,5 +3,5 @@
 <h3>{{currentRecipe.category}}</h3>
 <p>{{currentRecipe.description}}</p>
 <ul *ngFor="let ingredient of ingredients" [ngClass]="{'completed': completedItems.includes(ingredient)}">
-    <li (click)="toggleCompleted(ingredient)">{{ingredient.ing_name}}</li>
+    <li (click)="toggleCompleted(ingredient)">{{ingredient.ingredient.ing_name}}</li>
 </ul>

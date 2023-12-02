@@ -7,5 +7,7 @@ export interface Recipe {
 }
 
 export interface Ingredient {
-  ing_name: string
+  ingredient: {
+    ing_name: string
+  }
 }

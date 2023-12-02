@@ -13,16 +13,20 @@ export class WriteNewRecipeEntryService {
 
   // Write new data to the JSON file
   writeData(newData: Recipe): Observable<any> {
-    console.log('Before', newData)
+    const formattedData = this.formatJSONData(newData)
 
-    const jsonData = JSON.stringify({ recipes: newData })
+    console.log('After', formattedData)
 
-    console.log('After', newData)
-
-    return this.http.post(this.apiUrl, jsonData, {
+    return this.http.post(this.apiUrl, formattedData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
     })
+  }
+
+  formatJSONData(newData: Recipe): string {
+    const recipesArray = [newData]
+
+    return JSON.stringify({ recipes: recipesArray })
   }
 }
