@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { Recipe } from 'src/app/models/recipe.model'
 import { Ingredient } from 'src/app/models/recipe.model'
 import { WriteNewRecipeEntryService } from 'src/app/services/write-new-recipe-entry.service'
+import * as _ from 'lodash'
 
 @Component({
   standalone: true,
@@ -110,6 +111,8 @@ export class FormNewRecipeComponent {
 
   buildRecipe() {
     console.log('Build Recipe Ingredients', this.ingredients)
+
+    console.log(_.flatten(this.ingredients))
 
     const formattedIngredients = this.ingredients.map((ingredient) => {
       return { ing_name: ingredient.ing_name }

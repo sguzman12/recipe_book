@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Recipe } from '../models/recipe.model'
 
@@ -13,7 +13,16 @@ export class WriteNewRecipeEntryService {
 
   // Write new data to the JSON file
   writeData(newData: Recipe): Observable<any> {
-    console.log(newData)
-    return this.http.post(this.apiUrl, { recipes: newData })
+    console.log('Before', newData)
+
+    const jsonData = JSON.stringify({ recipes: newData })
+
+    console.log('After', newData)
+
+    return this.http.post(this.apiUrl, jsonData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    })
   }
 }
