@@ -5,7 +5,8 @@ section{
 }
 
 header{
-    color:#FF8000;
+    background-color:#27576b;
+    color: #f7f0f0;
     margin: 0;
     padding: 0;
     width:100%;
@@ -15,6 +16,7 @@ header{
 
 .dialog_header{
     height: 100%;
+    margin: 0;
 }
 
 .dialog_body{
@@ -38,6 +40,10 @@ header{
     width:fit-content; 
     justify-self: end;
     background-color: #AAFF00;
+}
+
+.image_upload{
+    padding-bottom: 1em;
 }
 
 @font-face {

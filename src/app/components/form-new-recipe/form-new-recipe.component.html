@@ -19,6 +19,10 @@
         </mat-select>
         <mat-hint>*required</mat-hint>
     </mat-form-field>
+    <div class="image_upload">
+        <mat-label>Share a photo</mat-label>
+        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+    </div>
     <mat-form-field appearance="outline">
         <mat-label>Tell Us About the Dish!</mat-label>
         <textarea matInput required [(ngModel)]="description"></textarea>

@@ -29,7 +29,7 @@
     /* justify-content:space-between;
     align-items: flex-start; */
     grid-row: 1/2;
-    background-color: #FF8000 ;
+    background-color: #27576b ;
 }
 .main{
  grid-row: 2/3;

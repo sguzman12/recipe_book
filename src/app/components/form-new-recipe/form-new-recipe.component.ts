@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { FormControl, FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -44,6 +45,7 @@ export class FormNewRecipeComponent {
   items: string[]
 
   constructor(
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<FormNewRecipeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private newEntry: WriteNewRecipeEntryService,
@@ -62,8 +64,8 @@ export class FormNewRecipeComponent {
     if (this.userIngredientInput.trim() !== '') {
       let newIngredient: Ingredient = { ingredient: { ing_name: this.userIngredientInput } }
       this.ingredients.push(newIngredient)
-      this.userIngredientInput = ''
       this.updateIngredientPanel()
+      this.userIngredientInput = ''
     }
   }
 
@@ -110,10 +112,6 @@ export class FormNewRecipeComponent {
   }
 
   buildRecipe() {
-    console.log('Build Recipe Ingredients', this.ingredients)
-
-    // console.log(_.flatten(this.ingredients))
-
     const formattedIngredients = this.ingredients.map((ingredient) => {
       return { ingredient: { ing_name: ingredient.ingredient.ing_name } }
     })
@@ -126,15 +124,29 @@ export class FormNewRecipeComponent {
       ingredients: formattedIngredients,
     }
 
-    this.newEntry.writeData(newRecipe).subscribe(
-      (response) => {
+    this.newEntry.writeData(newRecipe).subscribe({
+      next: (response) => {
         console.log('Data written successfully', response)
+        this.dialogRef.close()
+        // this.clearFormInput()
       },
-      (error) => {
+      error: (error) => {
         console.error('Error writing data', error)
       },
-    )
+      complete: () => console.log('Completed Without Errors'),
+    })
   }
+
+  clearFormInput(): void {
+    this.title = ''
+    this.category = ''
+    this.description = ''
+    this.ingredients = []
+    const ingredientPanel = document.getElementById('ingredientList')
+    ingredientPanel.innerHTML = ''
+  }
+
+  processFile(imageInput: any) {}
 
   trackOption(index: number, option: any): string {
     return option // or provide a unique identifier for each option
