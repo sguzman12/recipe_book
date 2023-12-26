@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { Recipe } from 'src/app/models/recipe.model'
 import { Ingredient } from 'src/app/models/recipe.model'
 import { WriteNewRecipeEntryService } from 'src/app/services/write-new-recipe-entry.service'
+import { S3ImagesService } from 'src/app/services/s3-images.service'
 import * as _ from 'lodash'
 
 @Component({
@@ -43,12 +44,14 @@ export class FormNewRecipeComponent {
   ingredientControl = new FormControl('')
   panelOpenState = true
   items: string[]
+  s3_url: ''
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<FormNewRecipeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private newEntry: WriteNewRecipeEntryService,
+    private s3Images: S3ImagesService,
   ) {}
 
   ngOnInit(): void {
@@ -127,8 +130,9 @@ export class FormNewRecipeComponent {
     this.newEntry.writeData(newRecipe).subscribe({
       next: (response) => {
         console.log('Data written successfully', response)
+        this.successConfirmationMessage()
         this.dialogRef.close()
-        // this.clearFormInput()
+        this.clearFormInput()
       },
       error: (error) => {
         console.error('Error writing data', error)
@@ -146,9 +150,52 @@ export class FormNewRecipeComponent {
     ingredientPanel.innerHTML = ''
   }
 
-  processFile(imageInput: any) {}
+  // processFile(imageInput: File) {
+  //   // this.s3Images.retrieveURL().subscribe((url) => {
+  //   //   this.s3Images.postImage(imageInput, url).subscribe({
+  //   //     next: (response) => {
+  //   //       console.log('Image Uploaded successfully:', response)
+  //   //     },
+  //   //     error: (error) => {
+  //   //       console.error('Error uploading image:', error)
+  //   //     },
+  //   //     complete: () => console.log('Completed upload without errors'),
+  //   //   })
+  //   // })
+  //   console.log(imageInput)
+  //   this.s3Images.postImage(imageInput).subscribe({
+  //     next: (response) => {
+  //       console.log('Image Uploaded successfully:', response)
+  //     },
+  //     error: (error) => {
+  //       console.log('Error uploading image:', error)
+  //     },
+  //     complete: () => console.log('Completed upload without errors'),
+  //   })
+  // }
+
+  processFile(event: any) {
+    console.log(event)
+    const fileList: FileList = event.target.files
+    if (fileList.length > 0) {
+      const imageFile: File = fileList[0]
+      this.s3Images.postImage(imageFile).subscribe({
+        next: (response) => {
+          console.log('Image Uploaded successfully:', response)
+        },
+        error: (error) => {
+          console.log('Error uploading image:', error)
+        },
+        complete: () => console.log('Completed upload without errors'),
+      })
+    }
+  }
 
   trackOption(index: number, option: any): string {
     return option // or provide a unique identifier for each option
+  }
+
+  successConfirmationMessage(): void {
+    alert('Successfully Uploaded Recipe')
   }
 }

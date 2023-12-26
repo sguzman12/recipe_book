@@ -21,7 +21,7 @@
     </mat-form-field>
     <div class="image_upload">
         <mat-label>Share a photo</mat-label>
-        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+        <input #imageInput type="file" accept="image/*" (change)="processFile($event)">
     </div>
     <mat-form-field appearance="outline">
         <mat-label>Tell Us About the Dish!</mat-label>
