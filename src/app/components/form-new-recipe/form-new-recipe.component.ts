@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
 import { Recipe } from 'src/app/models/recipe.model'
 import { Ingredient } from 'src/app/models/recipe.model'
+import { FetchRecipeService } from 'src/app/services/fetch-recipe.service'
 import { WriteNewRecipeEntryService } from 'src/app/services/write-new-recipe-entry.service'
 import { S3ImagesService } from 'src/app/services/s3-images.service'
 import * as _ from 'lodash'
@@ -52,6 +53,7 @@ export class FormNewRecipeComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private newEntry: WriteNewRecipeEntryService,
     private s3Images: S3ImagesService,
+    private recipeService: FetchRecipeService,
   ) {}
 
   ngOnInit(): void {
@@ -137,7 +139,10 @@ export class FormNewRecipeComponent {
       error: (error) => {
         console.error('Error writing data', error)
       },
-      complete: () => console.log('Completed Without Errors'),
+      complete: () => {
+        console.log('Completed Without Errors')
+        this.recipeService.changeFlag(true)
+      },
     })
   }
 
