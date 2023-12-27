@@ -36,7 +36,7 @@ import * as _ from 'lodash'
 export class FormNewRecipeComponent {
   title: string
   category: string
-  url_img: ''
+  url_img: string
   description: string
   userIngredientInput: string
   ingredients: Ingredient[]
@@ -122,7 +122,7 @@ export class FormNewRecipeComponent {
     let newRecipe: Recipe = {
       title: this.title,
       category: this.category,
-      url_img: '',
+      url_img: this.url_img,
       description: this.description,
       ingredients: formattedIngredients,
     }
@@ -150,30 +150,6 @@ export class FormNewRecipeComponent {
     ingredientPanel.innerHTML = ''
   }
 
-  // processFile(imageInput: File) {
-  //   // this.s3Images.retrieveURL().subscribe((url) => {
-  //   //   this.s3Images.postImage(imageInput, url).subscribe({
-  //   //     next: (response) => {
-  //   //       console.log('Image Uploaded successfully:', response)
-  //   //     },
-  //   //     error: (error) => {
-  //   //       console.error('Error uploading image:', error)
-  //   //     },
-  //   //     complete: () => console.log('Completed upload without errors'),
-  //   //   })
-  //   // })
-  //   console.log(imageInput)
-  //   this.s3Images.postImage(imageInput).subscribe({
-  //     next: (response) => {
-  //       console.log('Image Uploaded successfully:', response)
-  //     },
-  //     error: (error) => {
-  //       console.log('Error uploading image:', error)
-  //     },
-  //     complete: () => console.log('Completed upload without errors'),
-  //   })
-  // }
-
   processFile(event: any) {
     console.log(event)
     const fileList: FileList = event.target.files
@@ -182,6 +158,10 @@ export class FormNewRecipeComponent {
       this.s3Images.postImage(imageFile).subscribe({
         next: (response) => {
           console.log('Image Uploaded successfully:', response)
+          this.s3Images.imageUrl$.subscribe((url) => {
+            console.log('S3 URL: ', url)
+            this.url_img = url
+          })
         },
         error: (error) => {
           console.log('Error uploading image:', error)

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
 @Injectable({
@@ -8,6 +8,10 @@ import { switchMap } from 'rxjs/operators'
 })
 export class S3ImagesService {
   private apiUrl = 'http://localhost:3000/api/s3URL'
+  private imageUrlSubject = new BehaviorSubject<string>(null)
+
+  imageUrl$ = this.imageUrlSubject.asObservable()
+
   constructor(private http: HttpClient) {}
 
   // GET Secure URL from server for S3 bucket
@@ -21,22 +25,14 @@ export class S3ImagesService {
     return this.retrieveURL(imageType).pipe(
       switchMap((data: any) => {
         const url = data.url
-        const fullMimeType = data.type
+        const fullMimeType = imageFile.type
         const imageUrl = url.split('?')[0]
 
         console.log('URL Returned: ', url)
         console.log('Full MIME Type: ', fullMimeType)
-        console.log('Image URL: ', imageUrl)
+        this.imageUrlSubject.next(imageUrl)
 
-        const formData = new FormData()
-        formData.append('image', imageFile)
-        formData.append('imageType', imageType)
-
-        return this.http.put(url, formData, {
-          headers: new HttpHeaders({
-            'Content-Type': 'mulitpart/form-data',
-          }),
-        })
+        return this.http.put(url, imageFile)
       }),
     )
   }
