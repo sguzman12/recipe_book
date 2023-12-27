@@ -29,16 +29,18 @@ export class AppComponent {
   ) {
     this.displayDetailsService.showRecipeContainer$.subscribe((show) => (this.showRecipeContainer = show))
     this.displayDetailsService.showDetailsContainer$.subscribe((show) => (this.showDetailsContainer = show))
+
+    // Listen to the recipeChangeFlag and fetch recipes when it changes
+    this.recipeService.recipeChangeFlag.subscribe((flag) => {
+      if (flag) {
+        this.fetchRecipes()
+      }
+    })
   }
 
   ngOnInit(): void {
     // Retrieve Recipes
-    this.recipeService.getJSON().subscribe((data) => {
-      this.recipes = data.recipes
-      this.displayedRecipes = data.recipes
-
-      this.dataLoaded = true
-    })
+    this.recipeService.changeFlag(true)
 
     // Retrieve user Input and filter
     this.userInputService.userInput$.subscribe((input) => {
@@ -79,5 +81,16 @@ export class AppComponent {
   toggleContainers() {
     this.displayDetailsService.toggleRecipeContainer(!this.displayDetailsService.showRecipeContainer$)
     this.displayDetailsService.toggleDetailsContainer(!this.displayDetailsService.showDetailsContainer$)
+  }
+
+  fetchRecipes() {
+    // Retrieve Recipes
+    this.recipeService.getJSON().subscribe((data) => {
+      this.recipes = data.recipes
+      this.displayedRecipes = data.recipes
+
+      this.dataLoaded = true
+    })
+    this.recipeService.changeFlag(false)
   }
 }

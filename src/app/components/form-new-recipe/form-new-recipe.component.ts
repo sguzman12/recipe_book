@@ -15,6 +15,7 @@ import { Ingredient } from 'src/app/models/recipe.model'
 import { FetchRecipeService } from 'src/app/services/fetch-recipe.service'
 import { WriteNewRecipeEntryService } from 'src/app/services/write-new-recipe-entry.service'
 import { S3ImagesService } from 'src/app/services/s3-images.service'
+import { DataChangeService } from 'src/app/services/data-change.service'
 import * as _ from 'lodash'
 
 @Component({
@@ -53,6 +54,7 @@ export class FormNewRecipeComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private newEntry: WriteNewRecipeEntryService,
     private s3Images: S3ImagesService,
+    private dataChange: DataChangeService,
     private recipeService: FetchRecipeService,
   ) {}
 
@@ -141,6 +143,7 @@ export class FormNewRecipeComponent {
       },
       complete: () => {
         console.log('Completed Without Errors')
+        // this.dataChange.changeFlag(true)
         this.recipeService.changeFlag(true)
       },
     })
